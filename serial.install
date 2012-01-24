@@ -50,7 +50,7 @@ function serial_schema() {
            "FROM {field_config} f, {field_config_instance} i ".
            "WHERE f.field_name = i.field_name AND f.type = 'serial' AND i.deleted = 0";
   $result = db_query($query);
-  $projects = _get_germ_projects();
+  $projects = array('Druvis');
   foreach ($projects as $project) {
       foreach ($result as $field) {
         $table = _serial_get_table_name($field->bundle, $field->field_name, $project);
