@@ -50,11 +50,13 @@ function serial_schema() {
            "FROM {field_config} f, {field_config_instance} i ".
            "WHERE f.field_name = i.field_name AND f.type = 'serial' AND i.deleted = 0";
   $result = db_query($query);
-  foreach ($result as $field) {
-    $table = _serial_get_table_name($field->bundle, $field->field_name);
-    $schema[$table] = $table_schema;
+  $projects = _get_germ_projects();
+  foreach ($projects as $project) {
+      foreach ($result as $field) {
+        $table = _serial_get_table_name($field->bundle, $field->field_name, $project);
+        $schema[$table] = $table_schema;
+      }
   }
-
   // Return the schema of all the assistant tables (one per serial field instance):
   return $schema;
 }
