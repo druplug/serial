@@ -84,8 +84,6 @@ function serial_field_insert($entity_type, $entity, $field, $instance, $langcode
     $sid = _serial_generate_value($entity->nid, $instance['bundle'], $field['field_name'], $project->title);
     $items = array(array('value' => $sid));
     $entity->$field['field_name'] = $items;
-    $entity->title = $project->title . '-' . $sid;
-    
 }
 
 /**
